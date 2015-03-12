@@ -1,43 +1,6 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/Users/MinnieLee/Turing/1Module/Sales_Engine/sales_engine/lib/merchant_repository.rb": [
-        1,
-        null,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null
-      ],
       "/Users/MinnieLee/Turing/1Module/Sales_Engine/sales_engine/lib/parser.rb": [
         1,
         1,
@@ -47,15 +10,16 @@
         1,
         null,
         1,
-        0,
+        882,
         null,
         null,
         1,
-        0,
+        6,
         null,
         null,
         1,
-        0,
+        300,
+        null,
         null,
         null,
         null,
@@ -64,6 +28,6 @@
         null
       ]
     },
-    "timestamp": 1426127544
+    "timestamp": 1426137219
   }
 }

@@ -31,7 +31,7 @@ class MerchantRepository
   end
 
   def find_by_name(name)
-    customers.find {}
+    # fill out
   end
 end
 
