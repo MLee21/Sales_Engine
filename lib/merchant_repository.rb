@@ -1,33 +1,37 @@
 require_relative 'parser'
-require 'pry'
+require_relative 'merchant'
 
 class MerchantRepository
 
   attr_reader :merchants,
               :filename,
-              :parent
+              :repo
 
-  def self.parse(filename,parent)
-    parser = Parser.new(filename,parent)
+  def self.parse(filename, repo)
+    parser = Parser.new(filename)
     merchants = parser.parse 
-    new(merchants)    
+    new(merchants.map {|h| Merchant.new(h,self) }, repo)    
   end
 
-  def initialize(merchants,parent) 
+  def initialize(merchants, repo) 
     @merchants = merchants
-    @parent = parent 
+    @repo = repo
   end
+
+  # def raw_merchants
+  #   @raw_merchants ||= Parser.new(filename, parent).parse
+  # end
 
   def all
-    merchants
+    @merchants
   end
 
   def random
-    customers.sample
+    merchants.sample
   end
 
   def find_by_id(number)
-    customers.find {|customer| customer.id == number }
+    merchants.find {|merchant| merchant.id == number }
   end
 
   def find_by_name(name)
@@ -35,5 +39,5 @@ class MerchantRepository
   end
 end
 
-# merchant_repo = MerchantRepository.new('../test/data/merchants.csv')
-# merchant_repo.all
+merchant_repo = MerchantRepository.parse('../test/data/merchants.csv', "parent")
+puts merchant_repo.all
