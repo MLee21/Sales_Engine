@@ -21,7 +21,7 @@ class ParserTest < MiniTest::Test
   end
 
   def test_it_will_return_the_first_attribute_in_data
-    assert_equal 1, parser.parse[0[0]][:id]
+    assert_equal 1, parser.parse[0][:id]
   end
 
   def test_it_will_return_the_second_attribute_in_data

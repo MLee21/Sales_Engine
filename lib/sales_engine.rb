@@ -12,8 +12,8 @@ class SalesEngine
   end
 
   def merchant_repository
-    @merchant_repository = MerchantRepository.new.parse
-    # (data, self)
+    @merchant_repository = MerchantRepository.new("path/to/csv", self)
+    @merchant_repository.parse
   end
 
 
