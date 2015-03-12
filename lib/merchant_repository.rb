@@ -39,5 +39,5 @@ class MerchantRepository
   end
 end
 
-merchant_repo = MerchantRepository.parse('../test/data/merchants.csv', "parent")
-puts merchant_repo.all
+# merchant_repo = MerchantRepository.parse('../test/data/merchants.csv', "parent")
+# puts merchant_repo.all
