@@ -1,4 +1,5 @@
 require 'csv'
+require 'pry'
 
  class Parser
 
@@ -13,7 +14,8 @@ require 'csv'
    end
 
   def parse
-   @file.to_a.map {|row| row.to_hash }   
+   @file.to_a.map {|row| row.to_hash }  
+# binding.pry
    end
 end
 
