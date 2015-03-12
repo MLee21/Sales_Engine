@@ -15,9 +15,10 @@ require 'pry'
 
   def parse
    @file.to_a.map {|row| row.to_hash }  
-# binding.pry
    end
 end
 
-# merchant = Parser.new("../data/merchants.csv")
-# puts merchant.parse
+# parser = Parser.new('../test/data/merchants.csv')
+# puts parser.parse[0[0]][:id]
+
+
