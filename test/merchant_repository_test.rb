@@ -1,7 +1,6 @@
 require 'simplecov'
 SimpleCov.start
 gem "minitest","~> 5.2"
-# require "minitest"
 require "minitest/autorun"
 require "minitest/pride"
 require_relative '../lib/merchant_repository'
@@ -9,7 +8,7 @@ require_relative '../lib/sales_engine'
 
 class MerchantRepositoryTest < MiniTest::Test
 
-   attr_accessor :file_path
+  attr_accessor :file_path
   attr_reader :merchant_repo, :filename, :engine
 
   def setup
@@ -18,14 +17,14 @@ class MerchantRepositoryTest < MiniTest::Test
     @merchant_repo = MerchantRepository.parse(filename, engine)
   end
 
-  def test_it_will_return_all_of_the_merchant_objects
-    assert_equal 49, merchant_repo.all.count
-  end
-
   def test_it_knows_its_parent
     assert_equal engine, merchant_repo.parent
   end
 
+  def test_it_will_return_all_of_the_merchant_objects
+    assert_equal 49, merchant_repo.all.count
+  end
+  
   def test_it_will_return_random_merchant
     assert_equal false, merchant_repo.random == merchant_repo.random
   end
