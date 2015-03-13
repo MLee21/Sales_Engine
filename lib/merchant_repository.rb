@@ -1,13 +1,20 @@
 require_relative 'parser'
 require_relative 'merchant'
+<<<<<<< HEAD
 require 'pry'
+=======
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
 
 class MerchantRepository
 
   attr_reader :merchants,
               :filename,
+<<<<<<< HEAD
               :repo,
               :parent
+=======
+              :repo
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
 
   def self.parse(filename, repo)
     parser = Parser.new(filename)
@@ -15,6 +22,7 @@ class MerchantRepository
     new(merchants.map {|h| Merchant.new(h,self) }, repo)    
   end
 
+<<<<<<< HEAD
   def initialize(merchants, parent) 
     @merchants = merchants
     @parent = parent
@@ -22,10 +30,19 @@ class MerchantRepository
 
   def inspect
     "#<#{self.class} #{@merchants.size} rows>"
+=======
+  def initialize(merchants, repo) 
+    @merchants = merchants
+    @repo = repo
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
   end
 
+  # def raw_merchants
+  #   @raw_merchants ||= Parser.new(filename, parent).parse
+  # end
+
   def all
-    merchants
+    @merchants
   end
 
   def random
@@ -37,6 +54,7 @@ class MerchantRepository
   end
 
   def find_by_name(name)
+<<<<<<< HEAD
     merchants.find {|merchant| merchant.name == name }
   end
 
@@ -62,6 +80,14 @@ class MerchantRepository
 
   def find_all_by_updated_at(date)
     merchants.find_all {|merchant| merchant.updated_at == date }
+=======
+    # fill out
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
   end
 
+<<<<<<< HEAD
 end
+=======
+# merchant_repo = MerchantRepository.parse('../test/data/merchants.csv', "parent")
+# puts merchant_repo.all
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
