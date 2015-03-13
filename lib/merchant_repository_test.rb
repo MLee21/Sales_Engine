@@ -61,4 +61,8 @@ class MerchantRepositoryTest < MiniTest::Test
   def test_it_will_find_all_by_updated_at
     assert_equal 12, merchant_repo.find_all_by_updated_at("2012-03-27 14:54:00 UTC").count
   end
+
+  def test_it_will_return_all_of_the_merchant_objects
+    assert_equal "", merchant_repo.all
+  end
 end

@@ -3,10 +3,7 @@
     "coverage": {
       "/Users/MinnieLee/Turing/1Module/Sales_Engine/sales_engine/lib/customer_repository.rb": [
         1,
-<<<<<<< HEAD
         1,
-=======
->>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
         null,
         1,
         null,
@@ -35,75 +32,7 @@
         null,
         null,
         1,
-<<<<<<< HEAD
         0,
-=======
-        2,
-        null,
-        null,
-        1,
-<<<<<<< HEAD
-        2,
-=======
-<<<<<<< HEAD
-        0,
-=======
-        2,
-        null,
-        null,
-        1,
-        2,
-        null,
-        null,
-        1,
-        2,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-<<<<<<< HEAD
-        2,
-=======
-<<<<<<< HEAD
-        11,
->>>>>>> repo_work_ML
-        null,
-        null,
-=======
-        null,
-        null,
-        null,
-        0,
->>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
-        1,
-        2,
-        null,
-        null,
-        1,
-        2,
-        null,
-        null,
-        1,
-        2,
-        null,
-        null,
-        1,
-<<<<<<< HEAD
-        101,
->>>>>>> more_repo_work_ML
->>>>>>> even_more_repo_ML
-        null,
-        null,
-        1,
-        2,
-        null,
-        null,
-        1,
-        2,
->>>>>>> 3_13_repo_ML
         null,
         null,
         1,
@@ -119,7 +48,6 @@
         null,
         null,
         1,
-<<<<<<< HEAD
         2,
         null,
         null,
@@ -145,24 +73,6 @@
         null,
         1,
         100,
-=======
-<<<<<<< HEAD
-        0,
-=======
-        101,
-        null,
-=======
-<<<<<<< HEAD
-        50,
-=======
-        null,
-        null,
-        null,
->>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
->>>>>>> repo_work_ML
-        null,
->>>>>>> more_repo_work_ML
->>>>>>> even_more_repo_ML
         null,
         null
       ],
@@ -336,14 +246,13 @@
         null,
         null,
         null,
+        null,
         1,
         539,
         539,
         539,
         539,
         539,
-        null,
-        null,
         null,
         null
       ],
@@ -1079,6 +988,7 @@
         1,
         1,
         1,
+        1,
         null,
         1,
         null,
@@ -1178,7 +1088,6 @@
         1,
         null,
         null,
-        null,
         null
       ],
       "/Users/MinnieLee/Turing/1Module/Sales_Engine/sales_engine/test/transaction_repository_test.rb": [
@@ -1269,26 +1178,6 @@
         null
       ]
     },
-<<<<<<< HEAD
-    "timestamp": 1426265445
-=======
-<<<<<<< HEAD
-    "timestamp": 1426263574
-=======
-<<<<<<< HEAD
-    "timestamp": 1426228084
-=======
-<<<<<<< HEAD
-    "timestamp": 1426224410
-=======
-<<<<<<< HEAD
-    "timestamp": 1426217184
-=======
-    "timestamp": 1426176154
->>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
->>>>>>> repo_work_ML
->>>>>>> more_repo_work_ML
->>>>>>> even_more_repo_ML
->>>>>>> 3_13_repo_ML
+    "timestamp": 1426282929
   }
 }
