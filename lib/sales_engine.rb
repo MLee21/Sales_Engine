@@ -1,9 +1,11 @@
+require 'csv'
+require_relative './merchant_repository'
+
 class SalesEngine
 
   attr_reader :data
 
-  def initialize
-    # (data = './data')
+  def initialize(data)
     @data = data
   end
 
@@ -12,17 +14,6 @@ class SalesEngine
   end
 
   def merchant_repository
-    @merchant_repository = MerchantRepository.new.parse
-    # (data, self)
+    @merchant_repository = MerchantRepository.new("path/to/csv", self)
   end
-
-
-
-
-
-
-
-
-
-
 end
