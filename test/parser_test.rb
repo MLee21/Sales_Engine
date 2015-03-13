@@ -11,8 +11,7 @@ class ParserTest < MiniTest::Test
   attr_accessor :parser, :file_path
 
   def setup
-    self.file_path = File.expand_path'../../test/data/merchants.csv',__FILE__
-    @parser = Parser.new(file_path)
+    @parser = Parser.new('./test/data/merchants.csv')
   end
 
   def test_it_parsed_into_a_file
@@ -40,3 +39,4 @@ class ParserTest < MiniTest::Test
     assert_equal "Klein, Rempel and Jones", parser.parse[7[1]][:name]
   end
 end
+
