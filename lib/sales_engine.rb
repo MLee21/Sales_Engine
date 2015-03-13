@@ -1,5 +1,7 @@
 require 'csv'
 require_relative './merchant_repository'
+require_relative './item_repository'
+require_relative './invoice_item_repository'
 
 class SalesEngine
 
@@ -12,6 +14,7 @@ class SalesEngine
   def startup
     merchant_repository
     item_repository
+    invoice_item_repository
   end
 
   def merchant_repository
@@ -20,5 +23,9 @@ class SalesEngine
 
   def item_repository
     @item_repository = ItemRepository.new("path/to/csv", self)
+  end
+
+  def invoice_item_repository
+    @invoice_item_repository = InvoiceItemRepository.new("path/to/csv", self)
   end
 end
