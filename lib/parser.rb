@@ -3,7 +3,7 @@ require 'pry'
 
  class Parser
 
-  attr_reader :file
+  attr_reader :file, :parent
           
   CSV::Converters[:blank_to_nil] = lambda do |field|
     field && field.empty? ? nil : field
@@ -11,12 +11,18 @@ require 'pry'
   
   def initialize(filename)
     @file = CSV.open(filename, headers: true, header_converters: :symbol, converters: [:all, :blank_to_nil])
-   end
+  end
 
   def parse
+<<<<<<< HEAD
    @file.to_a.map {|row| row.to_hash }  
+=======
+    @file.to_a.map {|row| row.to_hash }  
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
   end
 end
 
-# merchant = Parser.new("../data/merchants.csv")
-# puts merchant.parse
+# parser = Parser.new('../test/data/merchants.csv')
+# puts parser.parse[0[0]][:id]
+
+
