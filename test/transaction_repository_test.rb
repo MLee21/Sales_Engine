@@ -82,5 +82,4 @@ class TransactionRepositoryTest < MiniTest::Test
   def test_it_will_find_all_transactions_by_updated_at
     assert_equal 2, trans_repo.find_all_transactions_by_updated_at("2012-03-27 14:54:09 UTC").count
   end
-
 end
