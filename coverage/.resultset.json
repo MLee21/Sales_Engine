@@ -4,7 +4,10 @@
       "/Users/MinnieLee/Turing/1Module/Sales_Engine/sales_engine/lib/merchant_repository.rb": [
         1,
         1,
+<<<<<<< HEAD
         1,
+=======
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
         null,
         1,
         null,
@@ -48,10 +51,21 @@
         11,
         null,
         null,
+        null,
+        null,
+        null,
+        null,
         1,
+<<<<<<< HEAD
         11,
         null,
         null,
+=======
+        null,
+        null,
+        null,
+        0,
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
         1,
         50,
         null,
@@ -65,7 +79,13 @@
         null,
         null,
         1,
+<<<<<<< HEAD
         50,
+=======
+        null,
+        null,
+        null,
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
         null,
         null,
         null
@@ -185,9 +205,14 @@
         1,
         null,
         null,
+        null,
         null
       ]
     },
+<<<<<<< HEAD
     "timestamp": 1426217184
+=======
+    "timestamp": 1426176154
+>>>>>>> 0c93f776da0f29c552dada3b95614146395ba864
   }
 }
