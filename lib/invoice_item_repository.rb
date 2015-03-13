@@ -32,30 +32,58 @@ class InvoiceItemRepository
   end
 
   def find_by_id(id)
-    invoice_items.find { |invoice_item| invoice_items.id == id }
+    invoice_items.find { |invoice_item| invoice_item.id == id }
   end
 
   def find_by_item_id(id)
-    invoice_items.find { |invoice_item| invoice_items.item_id == id }
+    invoice_items.find { |invoice_item| invoice_item.item_id == id }
   end
 
   def find_by_invoice_id(id)
-    invoice_items.find { |invoice_item| invoice_items.invoice_id == id }
+    invoice_items.find { |invoice_item| invoice_item.invoice_id == id }
   end
 
   def find_by_quantity(amount)
-    invoice_items.find { |invoice_item| invoice_items.quantity == amount }
+    invoice_items.find { |invoice_item| invoice_item.quantity == amount }
   end
 
   def find_by_unit_price(unit)
-    invoice_items.find { |invoice_item| invoice_items.unit_price == unit }
+    invoice_items.find { |invoice_item| invoice_item.unit_price == unit }
   end
 
   def find_by_created_at(date)
-    invoice_items.find { |invoice_item| invoice_items.created_at == date }
+    invoice_items.find { |invoice_item| invoice_item.created_at == date }
   end
 
   def find_by_updated_at(date)
-    invoice_items.find { |invoice_item| invoice_items.updated_at == date }
+    invoice_items.find { |invoice_item| invoice_item.updated_at == date }
+  end
+
+  def find_all_by_id(id)
+    invoice_items.find_all { |invoice_item| invoice_item.id == id }
+  end
+
+  def find_all_by_item_id(id)
+    invoice_items.find_all { |invoice_item| invoice_item.item_id == id }
+  end
+
+  def find_all_by_invoice_id(id)
+    invoice_items.find_all { |invoice_item| invoice_item.invoice_id == id }
+  end
+
+  def find_all_by_quantity(amount)
+    invoice_items.find_all { |invoice_item| invoice_item.quantity == amount }
+  end
+
+  def find_all_by_unit_price(unit)
+    invoice_items.find_all { |invoice_item| invoice_item.unit_price == unit } 
+  end
+
+  def find_all_by_created_at(date)
+    invoice_items.find_all { |invoice_item| invoice_item.created_at == date }
+  end
+
+  def find_all_by_updated_at(date)
+    invoice_items.find_all { |invoice_item| invoice_item.updated_at == date }
   end
 end
