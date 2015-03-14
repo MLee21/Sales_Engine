@@ -64,4 +64,11 @@ class MerchantRepository
     merchants.find_all {|merchant| merchant.updated_at == date }
   end
 
+  def find_items(id)
+    parent.find_items_by_merchant_id(id)
+  end
+
+  def find_invoices(id)
+    parent.find_invoices_by_merchant_id(id)
+  end
 end

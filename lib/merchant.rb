@@ -13,5 +13,11 @@ class Merchant
     @repo       = parent
   end
 
-  
+  def items(id)
+    repo.find_items(id)
+  end
+
+  def invoices(id)
+    repo.find_invoices(id)
+  end 
 end

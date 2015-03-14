@@ -11,12 +11,10 @@ require 'pry'
   
   def initialize(filename)
     @file = CSV.open(filename, headers: true, header_converters: :symbol, converters: [:all, :blank_to_nil])
-   end
+  end
 
   def parse
    @file.to_a.map {|row| row.to_hash }  
   end
 end
 
-# merchant = Parser.new("../data/merchants.csv")
-# puts merchant.parse

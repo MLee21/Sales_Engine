@@ -76,4 +76,44 @@ class InvoiceRepositoryTest < MiniTest::Test
   def test_it_will_find_all_invoice_by_updated_at
     assert_equal 1, invoice_repo.find_all_by_updated_at("2012-03-25 09:54:09 UTC").count
   end
+
+  def test_it_will_return_transactions_associated_with_the_invoice
+    sales_engine = MiniTest::Mock.new
+    repo = InvoiceRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_transactions_by_invoice_id,[11],[11])
+    assert_equal [11], repo.find_transactions(11)
+    sales_engine.verify
+  end
+
+  def test_it_will_return_invoice_items_associated_with_the_invoice
+    sales_engine = MiniTest::Mock.new
+    repo = InvoiceRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_invoice_items_by_invoice_id,[3],[3])
+    assert_equal [3], repo.find_invoice_items(3)
+    sales_engine.verify
+  end
+
+  # def test_it_will_return_items_associated_with_the_invoice
+  #   sales_engine = MiniTest::Mock.new
+  #   repo = InvoiceRepository.new(filename, sales_engine)
+  #   sales_engine.expect(:find_items_by_invoice_id, [1],[1])
+  #   assert_equal [1], repo.find_items_by_invoice_items(1)
+  #   sales_engine.verify
+  # end
+
+  def test_it_will_return_customers_associated_with_the_invoice
+    sales_engine = MiniTest::Mock.new
+    repo = InvoiceRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_customers_by_invoice_id, [1],[1])
+    assert_equal [1], repo.find_customers(1)
+    sales_engine.verify
+  end
+
+  def test_it_will_return_merchants_associated_with_the_invoice
+    sales_engine = MiniTest::Mock.new
+    repo = InvoiceRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_merchants_by_invoice_id, [1],[1])
+    assert_equal [1], repo.find_merchants(1)
+    sales_engine.verify
+  end
 end
