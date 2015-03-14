@@ -38,7 +38,6 @@ class TransactionRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_transaction_by_credit_card_number_expirated_date
-    skip
     assert_equal nil, trans_repo.find_transaction_by_credit_card_expiration_date(nil).credit_card_expiration_date
   end
 
@@ -67,8 +66,7 @@ class TransactionRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_all_transactions_by_credit_card_number_expiration_date
-    skip
-    assert_equal nil, trans_repo.find_all_transactions_by_credit_card_number_expiration_date('').credit_card_expiration_date
+    assert_equal 99, trans_repo.find_all_transactions_by_credit_card_number_expiration_date(nil).count
   end
 
   def test_it_will_find_all_transactions_by_result
