@@ -12,7 +12,7 @@ class TransactionRepositoryTest < MiniTest::Test
   attr_reader :engine, :trans_repo
 
   def setup
-    @filename = '../test/data/transactions.csv'
+    @filename = './test/data/transactions.csv'
     @engine = SalesEngine.new(filename)
     @trans_repo = TransactionRepository.parse(filename, engine)
   end

@@ -12,7 +12,7 @@ class ItemRepositoryTest < MiniTest::Test
   attr_reader :engine, :item_repo
 
   def setup
-    @filename = '../test/data/items.csv'
+    @filename = './test/data/items.csv'
     @engine = SalesEngine.new(filename)
     @item_repo = ItemRepository.parse(filename, engine)
   end
