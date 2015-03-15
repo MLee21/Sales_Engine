@@ -11,7 +11,7 @@ class InvoiceItemRepository
   def self.parse(filename, repo)
     parser = Parser.new(filename)
     invoice_items = parser.parse
-    new(invoice_items.map {|h| InvoiceItems.new(h,self) }, repo) 
+    new(invoice_items.map {|h| InvoiceItems.new(h,self) }, repo)
   end
 
   def initialize(invoice_items, parent)
@@ -76,7 +76,7 @@ class InvoiceItemRepository
   end
 
   def find_all_by_unit_price(unit)
-    invoice_items.find_all { |invoice_item| invoice_item.unit_price == unit } 
+    invoice_items.find_all { |invoice_item| invoice_item.unit_price == unit }
   end
 
   def find_all_by_created_at(date)

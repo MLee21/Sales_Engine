@@ -9,7 +9,7 @@ require_relative '../lib/sales_engine'
 class ItemRepositoryTest < MiniTest::Test
 
   attr_accessor :filename
-  attr_reader :engine, :item_repo 
+  attr_reader :engine, :item_repo
 
   def setup
     @filename = './test/data/items.csv'
@@ -79,7 +79,7 @@ class ItemRepositoryTest < MiniTest::Test
 
   def test_it_will_find_all_items_by_created_at
     assert_equal 100, item_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").count
-  end 
+  end
 
   def test_it_will_find_all_items_by_updated_at
     assert_equal 100, item_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").count

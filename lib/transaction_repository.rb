@@ -86,4 +86,8 @@ class TransactionRepository
   def find_all_transactions_by_updated_at(date)
     transactions.find_all { |transaction| transaction.updated_at == date }
   end
+
+  def invoice(invoice_id)
+    parent.transaction_invoice(invoice_id)
+  end
 end

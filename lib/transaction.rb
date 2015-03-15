@@ -6,7 +6,8 @@ class Transaction
               :credit_card_expiration_date,
               :result,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repo
 
   def initialize(data, parent)
     @id                          = data[:id].to_i
@@ -16,22 +17,11 @@ class Transaction
     @result                      = data[:result]
     @created_at                  = data[:created_at]
     @updated_at                  = data[:updated_at]
+    @repo                        = parent
   end
+
+  def invoice
+    repo.invoice(invoice_id)
+  end
+
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

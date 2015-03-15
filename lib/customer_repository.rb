@@ -11,7 +11,7 @@ class CustomerRepository
   def self.parse(filename, repo)
     parser = Parser.new(filename)
     customers = parser.parse
-    new(customers.map {|h| Customer.new(h,self) }, repo) 
+    new(customers.map {|h| Customer.new(h,self) }, repo)
   end
 
   def initialize(customers, parent)
@@ -64,10 +64,14 @@ class CustomerRepository
   end
 
   def find_all_customers_by_created_at(date)
-    customers.find_all { |customer| customer.created_at == date } 
+    customers.find_all { |customer| customer.created_at == date }
   end
 
   def find_all_customers_by_updated_at(date)
     customers.find_all { |customer| customer.updated_at == date }
+  end
+
+  def invoice(invoice_id)
+    parent.customer_invoices(invoice_id)
   end
 end
