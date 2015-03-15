@@ -25,20 +25,3 @@ class Transaction
   end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
