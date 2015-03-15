@@ -11,11 +11,11 @@ class MerchantRepository
 
   def self.parse(filename, repo)
     parser = Parser.new(filename)
-    merchants = parser.parse 
-    new(merchants.map {|h| Merchant.new(h,self) }, repo)    
+    merchants = parser.parse
+    new(merchants.map {|h| Merchant.new(h,self) }, repo)
   end
 
-  def initialize(merchants, parent) 
+  def initialize(merchants, parent)
     @merchants = merchants
     @parent = parent
   end
@@ -57,7 +57,7 @@ class MerchantRepository
   end
 
   def find_all_by_created_at(date)
-    merchants.find_all {|merchant| merchant.created_at == date }  
+    merchants.find_all {|merchant| merchant.created_at == date }
   end
 
   def find_all_by_updated_at(date)

@@ -18,4 +18,13 @@ class Items
     @updated_at  = data[:updated_at]
     @repo        = parent
   end
+
+  def invoice_items(invoice_items_id)
+    repo.invoice_items(invoice_items_id)
+  end
+
+  def merchant(merchant_id)
+    repo.merchant(merchant_id)
+  end
+
 end
