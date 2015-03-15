@@ -12,7 +12,7 @@ class MerchantRepository
   def self.parse(filename, repo)
     parser = Parser.new(filename)
     merchants = parser.parse 
-    new(merchants.map {|h| Merchant.new(h,self) }, repo)    
+    new(merchants.map {|merchant| Merchant.new(merchant,self) }, repo)
   end
 
   def initialize(merchants, parent) 
