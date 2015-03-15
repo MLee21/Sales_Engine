@@ -17,6 +17,3 @@ require 'pry'
    @file.to_a.map {|row| row.to_hash }   
   end
 end
-
-
-
