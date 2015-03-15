@@ -12,4 +12,8 @@ class TransactionTest < Minitest::Test
     assert Transaction
   end
 
+  def test_invoice
+
+  end
+
 end

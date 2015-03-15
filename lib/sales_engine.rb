@@ -46,4 +46,8 @@ class SalesEngine
   def customer_repository
     @customer_repository = CustomerRepository.new("path/to/csv", self)
   end
+
+  def transaction_invoice(invoice_id)
+    invoice_repository.find_by_id(invoice_id)
+  end
 end
