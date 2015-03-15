@@ -275,21 +275,25 @@
         null,
         null,
         null,
-        1,
-        686,
-        686,
-        686,
-        686,
-        686,
-        null,
         null,
         1,
-        0,
+        686,
+        686,
+        686,
+        686,
+        686,
         null,
         null,
         1,
         0,
         null,
+<<<<<<< HEAD
+        null,
+        1,
+        0,
+        null,
+=======
+>>>>>>> master
         null
       ],
       "/Users/MinnieLee/Turing/1Module/Sales_Engine/sales_engine/lib/item_repository.rb": [
@@ -1098,6 +1102,7 @@
         1,
         1,
         1,
+        1,
         null,
         1,
         null,
@@ -1319,6 +1324,10 @@
         null
       ]
     },
+<<<<<<< HEAD
     "timestamp": 1426367406
+=======
+    "timestamp": 1426282929
+>>>>>>> master
   }
 }

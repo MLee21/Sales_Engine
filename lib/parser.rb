@@ -3,7 +3,7 @@ require 'pry'
 
  class Parser
 
-  attr_reader :file
+  attr_reader :file, :parent
           
   CSV::Converters[:blank_to_nil] = lambda do |field|
     field && field.empty? ? nil : field
@@ -14,7 +14,6 @@ require 'pry'
   end
 
   def parse
-   @file.to_a.map {|row| row.to_hash }  
+   @file.to_a.map {|row| row.to_hash }   
   end
 end
-

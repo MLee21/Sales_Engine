@@ -3,7 +3,8 @@ class Merchant
   attr_reader :id,
               :name,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repo
 
   def initialize(data, parent)
     @id         = data[:id].to_i
