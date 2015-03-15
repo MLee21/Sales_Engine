@@ -79,19 +79,23 @@ class InvoiceRepository
     invoices.find_all { |invoice| invoice.updated_at == date }       
   end
 
-  def find_transactions(id)
+  def find_transactions_by_invoice_id(id)
     parent.find_transactions_by_invoice_id(id)
   end
 
-  def find_invoice_items(id)
+  def find_invoice_items_by_invoice_id(id)
     parent.find_invoice_items_by_invoice_id(id)
   end
 
-  def find_customers(id)
-    parent.find_customers_by_invoice_id(id)
+  def find_customer_by_invoice_id(id)
+    parent.find_customer_by_invoice_id(id)
   end
 
-  def find_merchants(id)
-    parent.find_merchants_by_invoice_id(id)
+  def find_merchant_by_invoice_id(id)
+    parent.find_merchant_by_invoice_id(id)
+  end
+
+  def find_items_by_invoice_items(id)
+    parent.find_items_by_invoice_id(id)
   end
 end

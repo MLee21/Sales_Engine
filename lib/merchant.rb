@@ -6,19 +6,19 @@ class Merchant
               :updated_at,
               :repo
 
-  def initialize(data, parent)
-    @id         = data[:id].to_i
+  def initialize(data, repo)
+    @id         = data[:id].to_i 
     @name       = data[:name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-    @repo       = parent
+    @repo       = repo
   end
 
-  def items(id)
+  def items
     repo.find_items(id)
   end
 
-  def invoices(id)
+  def invoices
     repo.find_invoices(id)
   end 
 end

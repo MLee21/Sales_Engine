@@ -84,4 +84,20 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   def test_it_will_find_all_items_by_updated_at
     assert_equal 15, invoice_item_repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC").count
   end
+
+   def test_it_will_return_invoices_associated_with_the_invoice_items
+    sales_engine = MiniTest::Mock.new
+    repo = InvoiceItemRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_invoice_by_invoice_item,[1],[1])
+    assert_equal [1], repo.find_invoice_by_invoice_item(1)
+    sales_engine.verify
+  end
+
+  def test_it_will_return_items_associated_with_the_invoice_items
+    sales_engine = MiniTest::Mock.new
+    repo = InvoiceItemRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_items_by_invoice_item, [1],[1])
+    assert_equal [1], repo.find_items_by_invoice_item(1)
+    sales_engine.verify
+  end
 end
