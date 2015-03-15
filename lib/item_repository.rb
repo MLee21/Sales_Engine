@@ -3,18 +3,18 @@ require_relative 'item'
 
 class ItemRepository
 
-  attr_reader :items, 
+  attr_reader :items,
               :filename,
               :repo,
               :parent
 
   def self.parse(filename, repo)
     parser = Parser.new(filename)
-    items = parser.parse 
-    new(items.map {|h| Items.new(h,self) }, repo)    
+    items = parser.parse
+    new(items.map {|h| Items.new(h,self) }, repo)
   end
 
-  def initialize(items, parent) 
+  def initialize(items, parent)
     @items = items
     @parent = parent
   end
@@ -87,5 +87,12 @@ class ItemRepository
     items.find_all { |item| item.updated_at == date }
   end
 
+  def invoice_items(invoice_item_id)
+    parent.item_invoice_items(invoice_items_id)
+  end
+
+  def merchant(merchant_id)
+    parent.item_merchant(merchant_id)
+  end
 
 end

@@ -16,7 +16,6 @@ class TransactionRepositoryTest < MiniTest::Test
     @engine = SalesEngine.new(filename)
     @trans_repo = TransactionRepository.parse(filename, engine)
   end
-
   def test_it_will_know_its_parent
     assert_equal engine, trans_repo.parent
   end
@@ -30,7 +29,7 @@ class TransactionRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_transaction_by_invoice_id
-    assert_equal 10, trans_repo.find_transaction_by_invoice_id(10).invoice_id
+    assert_equal 9, trans_repo.find_transaction_by_invoice_id(10).id
   end
 
   def test_it_will_find_transaction_by_credit_card_number
@@ -38,7 +37,6 @@ class TransactionRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_transaction_by_credit_card_number_expirated_date
-    skip
     assert_equal nil, trans_repo.find_transaction_by_credit_card_expiration_date(nil).credit_card_expiration_date
   end
 
@@ -67,8 +65,7 @@ class TransactionRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_all_transactions_by_credit_card_number_expiration_date
-    skip
-    assert_equal nil, trans_repo.find_all_transactions_by_credit_card_number_expiration_date('').credit_card_expiration_date
+    assert_equal 99, trans_repo.find_all_transactions_by_credit_card_number_expiration_date(nil).count
   end
 
   def test_it_will_find_all_transactions_by_result
@@ -81,5 +78,14 @@ class TransactionRepositoryTest < MiniTest::Test
 
   def test_it_will_find_all_transactions_by_updated_at
     assert_equal 2, trans_repo.find_all_transactions_by_updated_at("2012-03-27 14:54:09 UTC").count
+  end
+
+  def test_invoice_method_will_return_invoice_id_associated_with_a_particular_transaction
+    sales_engine = MiniTest::Mock.new
+    repo = TransactionRepository.new(filename, sales_engine)
+    invoice = Invoice.new({id: 10}, 'fake parent')
+    sales_engine.expect(:transaction_invoice, invoice, [10])
+    assert_equal invoice, repo.invoice(10)
+    sales_engine.verify
   end
 end

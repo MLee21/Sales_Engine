@@ -22,4 +22,3 @@ class Merchant
     repo.find_invoices(id)
   end 
 end
-

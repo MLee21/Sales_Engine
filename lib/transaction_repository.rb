@@ -6,12 +6,12 @@ class TransactionRepository
   attr_reader :filename,
               :transactions,
               :parent,
-              :repo 
+              :repo
 
   def self.parse(filename, repo)
     parser = Parser.new(filename)
     transactions = parser.parse
-    new(transactions.map {|h| Transaction.new(h,self) }, repo) 
+    new(transactions.map {|h| Transaction.new(h,self) }, repo)
   end
 
   def initialize(transactions, parent)
@@ -44,7 +44,7 @@ class TransactionRepository
   end
 
   def find_transaction_by_credit_card_expiration_date(date)
-    transactions.find { |transaction| transaction.credit_card_number_expiration_date == date }
+    transactions.find { |transaction| transaction.credit_card_expiration_date == date }
   end
 
   def find_transaction_by_result(details)
@@ -72,7 +72,7 @@ class TransactionRepository
   end
 
   def find_all_transactions_by_credit_card_number_expiration_date(date)
-    transactions.find_all { |transaction| transaction.credit_card_card_expiration_date == date }
+    transactions.find_all { |transaction| transaction.credit_card_expiration_date == date }
   end
 
   def find_all_transactions_by_result(details)
@@ -85,5 +85,9 @@ class TransactionRepository
 
   def find_all_transactions_by_updated_at(date)
     transactions.find_all { |transaction| transaction.updated_at == date }
+  end
+
+  def invoice(invoice_id)
+    parent.transaction_invoice(invoice_id)
   end
 end
