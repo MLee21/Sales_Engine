@@ -12,5 +12,13 @@ class Merchant
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
     @repo       = parent
-  end  
+  end
+
+  def items(id)
+    repo.find_items(id)
+  end
+
+  def invoices(id)
+    repo.find_invoices(id)
+  end 
 end

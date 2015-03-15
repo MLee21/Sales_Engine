@@ -78,4 +78,20 @@ class InvoiceRepository
   def find_all_by_updated_at(date)
     invoices.find_all { |invoice| invoice.updated_at == date }       
   end
+
+  def find_transactions(id)
+    parent.find_transactions_by_invoice_id(id)
+  end
+
+  def find_invoice_items(id)
+    parent.find_invoice_items_by_invoice_id(id)
+  end
+
+  def find_customers(id)
+    parent.find_customers_by_invoice_id(id)
+  end
+
+  def find_merchants(id)
+    parent.find_merchants_by_invoice_id(id)
+  end
 end

@@ -15,5 +15,23 @@ class Invoice
     @created_at     = data[:created_at]
     @updated_at     = data[:updated_at]
   end
+
+  def invoice_items
+    repo.find_invoice_items_by_invoice_id(id)
+  end
+
+  def transactions
+    repo.find_transactions_by_invoice_id(id)
+  end
+
+  def customers
+    repo.find_customers_by_invoice_id(id)
+  end
+  
+  # def items
+  #   invoice_items
+  # end
+
+
 end
 
