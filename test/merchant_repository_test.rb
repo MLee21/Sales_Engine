@@ -61,4 +61,36 @@ class MerchantRepositoryTest < MiniTest::Test
   def test_it_will_find_all_by_updated_at
     assert_equal 12, merchant_repo.find_all_by_updated_at("2012-03-27 14:54:00 UTC").count
   end
+
+  def test_it_will_return_items_associated_with_the_merchant
+    sales_engine = MiniTest::Mock.new
+    repo = MerchantRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_items_by_merchant_id,[1],[1])
+    assert_equal [1], repo.find_items(1)
+    sales_engine.verify
+  end
+
+  def test_it_will_return_a_different_item_associated_with_the_merchant
+    sales_engine = MiniTest::Mock.new
+    repo = MerchantRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_items_by_merchant_id,[2],[2])
+    assert_equal [2], repo.find_items(2)
+    sales_engine.verify
+  end
+
+  def test_it_will_return_invoices_associated_with_the_merchant
+    sales_engine = MiniTest::Mock.new
+    repo = MerchantRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_invoices_by_merchant_id,[26],[26])
+    assert_equal [26], repo.find_invoices(26)
+    sales_engine.verify
+  end
+
+  def test_it_will_return_invoices_associated_with_the_merchant
+    sales_engine = MiniTest::Mock.new
+    repo = MerchantRepository.new(filename, sales_engine)
+    sales_engine.expect(:find_invoices_by_merchant_id, [76],[76])
+    assert_equal [76], repo.find_invoices(76)
+    sales_engine.verify
+  end
 end
