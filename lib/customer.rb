@@ -4,19 +4,20 @@ class Customer
               :first_name,
               :last_name,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repo
 
-  def initialize(data, parent)
+  def initialize(data, repo)
     @id         = data[:id].to_i
     @first_name = data[:first_name]
     @last_name  = data[:last_name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-    @repo       = parent
+    @repo       = repo
   end
 
-  def invoice
-    repo.invoice(invoice_id)
+  def invoices
+    repo.invoices(id)
   end
 
 end

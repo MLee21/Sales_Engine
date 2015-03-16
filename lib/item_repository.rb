@@ -1,5 +1,7 @@
 require_relative 'parser'
 require_relative 'item'
+require 'pry'
+
 
 class ItemRepository
 
@@ -11,7 +13,7 @@ class ItemRepository
   def self.parse(filename, repo)
     parser = Parser.new(filename)
     items = parser.parse
-    new(items.map {|h| Items.new(h,self) }, repo)
+    items.map {|h| Items.new(h,self) }
   end
 
   def initialize(items, parent)
@@ -64,7 +66,7 @@ class ItemRepository
   end
 
   def find_all_by_name(name)
-    items.find_all { |item| item.name == name }
+    items.find_all { |item| item.name == name } 
   end
 
   def find_all_by_description(details)
@@ -87,8 +89,8 @@ class ItemRepository
     items.find_all { |item| item.updated_at == date }
   end
 
-  def invoice_items(invoice_item_id)
-    parent.item_invoice_items(invoice_items_id)
+  def invoice_items(id)
+    parent.item_invoice_items(id)
   end
 
   def merchant(merchant_id)

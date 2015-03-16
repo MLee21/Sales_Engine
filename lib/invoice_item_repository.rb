@@ -11,7 +11,7 @@ class InvoiceItemRepository
   def self.parse(filename, repo)
     parser = Parser.new(filename)
     invoice_items = parser.parse
-    new(invoice_items.map {|h| InvoiceItems.new(h,self) }, repo)
+    invoice_items.map {|h| InvoiceItems.new(h,self) }
   end
 
   def initialize(invoice_items, parent)
@@ -33,6 +33,10 @@ class InvoiceItemRepository
 
   def find_by_id(id)
     invoice_items.find { |invoice_item| invoice_item.id == id }
+  end
+
+  def find_by_name(name)
+    invoice_items.find { |invoice_item| invoice_item.name == name }
   end
 
   def find_by_item_id(id)
@@ -61,6 +65,10 @@ class InvoiceItemRepository
 
   def find_all_by_id(id)
     invoice_items.find_all { |invoice_item| invoice_item.id == id }
+  end
+
+  def find_all_by_name(name)
+    invoice_items.find_all { |invoice_item| invoice_item.name == name }
   end
 
   def find_all_by_item_id(id)

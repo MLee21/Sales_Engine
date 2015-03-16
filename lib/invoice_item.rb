@@ -11,7 +11,7 @@ class InvoiceItems
 
   def initialize(data, repo)
     @id         = data[:id].to_i
-    @item_id    = data[:item_id]
+    @item_id    = data[:item_id].to_i
     @invoice_id = data[:invoice_id]
     @quantity   = data[:quantity]
     @unit_price = data[:unit_price]

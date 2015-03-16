@@ -11,7 +11,7 @@ class InvoiceRepository
   def self.parse(filename, repo)
     parser = Parser.new(filename)
     invoices = parser.parse
-    new(invoices.map {|h| Invoice.new(h,self) }, repo)
+    invoices.map {|h| Invoice.new(h,self) }
   end
 
   def initialize(invoices, parent)
