@@ -15,11 +15,11 @@ class InvoiceTest < MiniTest::Test
   def setup
     @filename = './test/data/invoices.csv'
     @engine = SalesEngine.new(filename)
-    @invoice_repository = InvoiceRepository.parse(filename, engine)
+    @invoice_repository = InvoiceRepository.load_csvs(filename, engine)
   end
 
   def test_it_knows_its_parent
-    assert_equal invoice_repository.class, invoice_repository.invoices.first.repo 
+    assert_equal invoice_repository, invoice_repository.invoices.first.repo
   end
 
   def test_it_has_attributes_associated_with_the_invoice

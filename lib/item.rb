@@ -1,4 +1,6 @@
-class Items
+require 'bigdecimal/util'
+
+class Item
 
   attr_reader :id,
               :name,
@@ -19,12 +21,12 @@ class Items
     @repo        = parent
   end
 
-  def invoice_items(invoice_items_id)
-    repo.invoice_items(invoice_items_id)
+  def invoice_items
+    repo.invoice_items(id)
   end
 
-  def merchant(merchant_id)
-    repo.merchant(merchant_id)
+  def merchant
+    repo.merchant(id)
   end
 
 end

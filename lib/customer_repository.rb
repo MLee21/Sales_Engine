@@ -5,18 +5,25 @@ class CustomerRepository
 
   attr_reader :filename,
               :customers,
-              :parent,
-              :repo
+              :sales_engine
+              # :repo,  
+              ## ran rake spec without this variable and 
+              # still ran after changing parse method
+              ## not sure if it's necessary for rest of repo. don't delete until sure.           
 
-  def self.parse(filename, repo)
+  def self.load_csvs(filename, sales_engine)
+    repo = self.allocate()
     parser = Parser.new(filename)
-    customers = parser.parse
-    new(customers.map {|h| Customer.new(h,self) }, repo)
+    customers = parser.parse.map do |customer|
+      Customer.new(customer, repo)
+    end
+    repo.send(:initialize, customers, sales_engine)
+    repo 
   end
 
-  def initialize(customers, parent)
+  def initialize(customers, sales_engine)
     @customers = customers
-    @parent = parent
+    @sales_engine = sales_engine
   end
 
   def inspect
@@ -31,47 +38,47 @@ class CustomerRepository
     customers.sample
   end
 
-  def find_customers_by_id(id)
+  def find_by_id(id)
     customers.find { |customer| customer.id == id }
   end
 
-  def find_customers_by_first_name(name)
+  def find_by_first_name(name)
     customers.find { |customer| customer.first_name == name }
   end
 
-  def find_customers_by_last_name(name)
+  def find_by_last_name(name)
     customers.find { |customer| customer.last_name == name }
   end
 
-  def find_customers_by_created_at(date)
+  def find_by_created_at(date)
     customers.find { |customer| customer.created_at == date }
   end
 
-  def find_customers_by_updated_at(date)
+  def find_by_updated_at(date)
     customers.find { |customer| customer.updated_at == date }
   end
 
-  def find_all_customers_by_id(id)
+  def find_all_by_id(id)
     customers.find_all { |customer| customer.id == id }
   end
 
-  def find_all_customers_by_first_name(name)
+  def find_all_by_first_name(name)
     customers.find_all { |customer| customer.first_name == name }
   end
 
-  def find_all_customers_by_last_name(name)
+  def find_all_by_last_name(name)
     customers.find_all { |customer| customer.last_name == name }
   end
 
-  def find_all_customers_by_created_at(date)
+  def find_all_by_created_at(date)
     customers.find_all { |customer| customer.created_at == date }
   end
 
-  def find_all_customers_by_updated_at(date)
+  def find_all_by_updated_at(date)
     customers.find_all { |customer| customer.updated_at == date }
   end
 
-  def invoice(invoice_id)
-    parent.customer_invoices(invoice_id)
+  def invoices(id)
+    sale_engine.find_customer_invoices(id)
   end
 end

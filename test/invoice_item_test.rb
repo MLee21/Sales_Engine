@@ -15,11 +15,11 @@ class InvoiceItemTest < MiniTest::Test
   def setup
     @filename = './test/data/invoice_items.csv'
     @engine = SalesEngine.new(filename)
-    @invoice_item_repository = InvoiceItemRepository.parse(filename, engine)
+    @invoice_item_repository = InvoiceItemRepository.load_csvs(filename, engine)
   end
 
   def test_it_knows_its_parent
-    assert_equal invoice_item_repository.class, invoice_item_repository.invoice_items.first.repo
+    assert_equal invoice_item_repository, invoice_item_repository.invoice_items.first.repo
   end
 
   def test_it_has_attributes_associated_with_the_invoice_items
@@ -34,7 +34,7 @@ class InvoiceItemTest < MiniTest::Test
 
   def test_repo_finds_invoices_by_invoice_item
     repo = MiniTest::Mock.new
-    invoice_item = InvoiceItems.new({},repo)
+    invoice_item = InvoiceItem.new({},repo)
     repo.expect(:find_invoices_by_invoice_item,[1],[0])
     assert_equal [1], invoice_item.invoice
     repo.verify
@@ -42,7 +42,7 @@ class InvoiceItemTest < MiniTest::Test
 
   def test_repo_finds_items_by_invoice_item
     repo = MiniTest::Mock.new
-    invoice_item = InvoiceItems.new({},repo)
+    invoice_item = InvoiceItem.new({},repo)
     repo.expect(:find_items_by_invoice_item, [539],[0])
     assert_equal [539], invoice_item.item
     repo.verify
