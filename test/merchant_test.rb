@@ -23,7 +23,7 @@ class MerchantTest < MiniTest::Test
   end
 
   def test_it_knows_its_parent
-    assert_equal merchant_repository.class, merchant_repository.merchants.first.repo
+    assert_equal merchant_repository, merchant_repository.merchants.first.repo
   end
 
   def test_it_has_attributes_associated_with_the_merchant
