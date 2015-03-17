@@ -17,7 +17,7 @@ class Customer
   end
 
   def invoices
-    repo.invoices(id)
+    repo.find_invoices(id)
   end
 
 end

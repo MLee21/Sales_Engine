@@ -94,7 +94,7 @@ class TransactionRepository
     transactions.find_all { |transaction| transaction.updated_at == date }
   end
 
-  def invoice(invoice_id)
-    sales_engine.transaction_invoice(invoice_id)
+  def find_invoice(id)
+    sales_engine.find_invoice_by_transaction(id)
   end
 end

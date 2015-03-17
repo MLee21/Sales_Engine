@@ -9,19 +9,19 @@ class Transaction
               :updated_at,
               :repo
 
-  def initialize(data, parent)
+  def initialize(data, repo)
     @id                          = data[:id].to_i
-    @invoice_id                  = data[:invoice_id]
+    @invoice_id                  = data[:invoice_id].to_i
     @credit_card_number          = data[:credit_card_number].to_s
     @credit_card_expiration_date = data[:credit_card_expiration_date]
     @result                      = data[:result]
     @created_at                  = data[:created_at]
     @updated_at                  = data[:updated_at]
-    @repo                        = parent
+    @repo                        = repo
   end
 
   def invoice
-    repo.invoice(invoice_id)
+    repo.find_invoice(invoice_id)
   end
 
 end

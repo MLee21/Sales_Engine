@@ -101,11 +101,11 @@ class InvoiceItemRepository
     invoice_items.find_all { |invoice_item| invoice_item.updated_at == date }
   end
 
-  def find_invoice_by_invoice_item(id)
+  def find_invoice(id)
     sales_engine.find_invoice_by_invoice_item(id)
   end
 
-  def find_items_by_invoice_item(id)
-    sales_engine.find_items_by_invoice_item(id)
+  def find_item(id)
+    sales_engine.find_item_by_invoice_item(id)
   end
 end
