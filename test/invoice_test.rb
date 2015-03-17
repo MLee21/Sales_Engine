@@ -35,7 +35,7 @@ class InvoiceTest < MiniTest::Test
   def test_repo_finds_transactions_for_invoices
     repo = MiniTest::Mock.new
     invoice = Invoice.new({},repo)
-    repo.expect(:find_transactions_by_invoice_id,[1],[0])
+    repo.expect(:find_by_invoice_id,[1],[0])
     assert_equal [1], invoice.transactions 
     repo.verify
   end
@@ -43,7 +43,7 @@ class InvoiceTest < MiniTest::Test
   def test_repo_finds_invoice_items_for_invoices
     repo = MiniTest::Mock.new
     invoice = Invoice.new({},repo)
-    repo.expect(:find_invoice_items_by_invoice_id,[1],[0])
+    repo.expect(:find_invoice_item,[1],[0])
     assert_equal [1], invoice.invoice_items
     repo.verify
   end
@@ -60,7 +60,7 @@ class InvoiceTest < MiniTest::Test
   def test_repo_finds_customers_for_invoices
     repo = MiniTest::Mock.new
     invoice = Invoice.new({},repo)
-    repo.expect(:find_customer_by_invoice_id, [1],[0])
+    repo.expect(:find_customer, [1],[0])
     assert_equal [1], invoice.customer
     repo.verify
   end

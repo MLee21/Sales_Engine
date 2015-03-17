@@ -1,6 +1,7 @@
 require_relative 'parser'
 require_relative 'item'
 require 'pry'
+require 'bigdecimal'
 
 class ItemRepository
 

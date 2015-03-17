@@ -90,7 +90,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
     sales_engine = MiniTest::Mock.new
     repo = InvoiceItemRepository.new(filename, sales_engine)
     sales_engine.expect(:find_invoice_by_invoice_item,[1],[1])
-    assert_equal [1], repo.find_invoice_by_invoice_item(1)
+    assert_equal [1], repo.find_invoice(1)
     sales_engine.verify
   end
 
@@ -98,7 +98,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
     sales_engine = MiniTest::Mock.new
     repo = InvoiceItemRepository.new(filename, sales_engine)
     sales_engine.expect(:find_item_by_invoice_item, [1],[1])
-    assert_equal [1], repo.find_item_by_invoice_item(1)
+    assert_equal [1], repo.find_item(1)
     sales_engine.verify
   end
 end
