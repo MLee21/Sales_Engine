@@ -7,18 +7,23 @@ class ItemRepository
 
   attr_reader :items,
               :filename,
-              :repo,
-              :parent
+              # :repo, ## ran rake spec without this variable and still ran after changing parse method
+              ## not sure if it's necessary for rest of repo. don't delete until sure.
+              :sales_engine
 
-  def self.parse(filename, repo)
+  def self.load_csvs(filename, sales_engine)
+    repo = self.allocate()
     parser = Parser.new(filename)
-    items = parser.parse
-    items.map {|h| Items.new(h,self) }
+    items = parser.parse.map do |item|
+      Item.new(item, repo)
+    end
+    repo.send(:initialize, items, sales_engine)
+    repo
   end
 
-  def initialize(items, parent)
+  def initialize(items, sales_engine)
     @items = items
-    @parent = parent
+    @sales_engine = sales_engine
   end
 
   def inspect
@@ -90,11 +95,11 @@ class ItemRepository
   end
 
   def invoice_items(id)
-    parent.item_invoice_items(id)
+    sales_engine.item_invoice_items(id)
   end
 
   def merchant(merchant_id)
-    parent.item_merchant(merchant_id)
+    sales_engine.item_merchant(merchant_id)
   end
 
 end

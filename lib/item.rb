@@ -1,6 +1,6 @@
 require 'bigdecimal/util'
 
-class Items
+class Item
 
   attr_reader :id,
               :name,

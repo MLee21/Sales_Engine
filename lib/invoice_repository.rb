@@ -5,18 +5,25 @@ class InvoiceRepository
 
   attr_reader :filename,
               :invoices,
-              :parent,
-              :repo
+              :sales_engine
+              # :repo ## ran rake spec without this variable
+               # and still ran after changing parse method
+              ## not sure if it's necessary for rest of repo. don't delete until sure.
+          
 
-  def self.parse(filename, repo)
+  def self.load_csvs(filename, sales_engine)
+    repo = self.allocate()
     parser = Parser.new(filename)
-    invoices = parser.parse
-    invoices.map {|h| Invoice.new(h,self) }
+    invoices = parser.parse.map do |invoice|
+      Invoice.new(invoice, repo)
+    end
+    repo.send(:initialize, invoices, sales_engine)
+    repo
   end
 
-  def initialize(invoices, parent)
+  def initialize(invoices, sales_engine)
     @invoices = invoices
-    @parent = parent
+    @sales_engine = sales_engine
   end
 
   def inspect
@@ -80,22 +87,22 @@ class InvoiceRepository
   end
 
   def find_transactions_by_invoice_id(id)
-    parent.find_transactions_by_invoice_id(id)
+    sales_engine.find_transactions_by_invoice_id(id)
   end
 
   def find_invoice_items_by_invoice_id(id)
-    parent.find_invoice_items_by_invoice_id(id)
+    sales_engine.find_invoice_items_by_invoice_id(id)
   end
 
   def find_customer_by_invoice_id(id)
-    parent.find_customer_by_invoice_id(id)
+    sales_engine.find_customer_by_invoice_id(id)
   end
 
   def find_merchant_by_invoice_id(id)
-    parent.find_merchant_by_invoice_id(id)
+    sales_engine.find_merchant_by_invoice_id(id)
   end
 
   def find_items_by_invoice_items(id)
-    parent.find_items_by_invoice_id(id)
+    sales_engine.find_items_by_invoice_id(id)
   end
 end

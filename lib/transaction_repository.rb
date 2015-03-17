@@ -5,18 +5,25 @@ class TransactionRepository
 
   attr_reader :filename,
               :transactions,
-              :parent,
-              :repo
+              :sales_engine
+              # :repo
+              ## ran rake spec without this variable and 
+              # still ran after changing parse method
+              ## not sure if it's necessary for rest of repo. don't delete until sure.:repo
 
-  def self.parse(filename, repo)
+  def self.load_csvs(filename, sales_engine)
+    repo = self.allocate()
     parser = Parser.new(filename)
-    transactions = parser.parse
-    transactions.map {|h| Transaction.new(h,self) }
+    transactions = parser.parse.map do |transaction|
+      Transaction.new(transaction, repo)
+    end
+    repo.send(:initialize, transactions, sales_engine)
+    repo 
   end
 
-  def initialize(transactions, parent)
+  def initialize(transactions, sales_engine)
     @transactions = transactions
-    @parent = parent
+    @sales_engine = sales_engine
   end
 
   def inspect
@@ -88,6 +95,6 @@ class TransactionRepository
   end
 
   def invoice(invoice_id)
-    parent.transaction_invoice(invoice_id)
+    sales_engine.transaction_invoice(invoice_id)
   end
 end

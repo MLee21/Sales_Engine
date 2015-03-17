@@ -15,7 +15,7 @@ class MerchantTest < MiniTest::Test
   def setup
     @filename = './test/data/merchants.csv'
     @engine = SalesEngine.new(filename)
-    @merchant_repository = MerchantRepository.parse(filename, engine)
+    @merchant_repository = MerchantRepository.load_csvs(filename, engine)
   end
 
   def test_it_exists

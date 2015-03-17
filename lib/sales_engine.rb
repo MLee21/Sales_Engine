@@ -1,4 +1,5 @@
 require 'csv'
+require 'pry'
 require_relative './parser'
 require_relative './merchant_repository'
 require_relative './item_repository'
@@ -25,27 +26,27 @@ class SalesEngine
   end
 
   def merchant_repository
-    @merchant_repository = MerchantRepository.new(MerchantRepository.parse('../sales_engine/data/merchants.csv', MerchantRepository), self)
+    @merchant_repository = MerchantRepository.load_csvs("#{data}/merchants.csv", self)
   end
 
   def item_repository
-    @item_repository = ItemRepository.new(ItemRepository.parse('../sales_engine/data/items.csv', ItemRepository), self)
+    @item_repository = ItemRepository.load_csvs("#{data}/items.csv", self)
   end
 
   def invoice_item_repository
-    @invoice_item_repository = InvoiceItemRepository.new(InvoiceItemRepository.parse('../sales_engine/data/invoice_items.csv', InvoiceItemRepository), self)
+    @invoice_item_repository = InvoiceItemRepository.load_csvs("#{data}/invoice_items.csv", self)
   end
 
   def invoice_repository
-    @invoice_repository = InvoiceRepository.new(InvoiceRepository.parse('../sales_engine/data/invoices.csv', InvoiceRepository), self)
+    @invoice_repository = InvoiceRepository.load_csvs("#{data}/invoices.csv", self)
   end
 
   def transaction_repository
-    @transaction_repository = TransactionRepository.new(TransactionRepository.parse('../sales_engine/data/transactions.csv', TransactionRepository), self)
+    @transaction_repository = TransactionRepository.load_csvs("#{data}/transactions.csv", self)
   end
 
   def customer_repository
-    customer_repository = CustomerRepository.new(CustomerRepository.parse('../sales_engine/data/customers.csv', CustomerRepository), self)
+    customer_repository = CustomerRepository.load_csvs("#{data}/customers.csv", self)
   end
 
   def find_items_by_merchant_id(id)
@@ -77,7 +78,7 @@ class SalesEngine
   end
 
   def find_items_by_invoice_item(id)
-    @item_repository.find_items_by_invoice_itSalesEngine.SalesEngine.SalesEngine.SalesEngine.m(id)
+    @item_repository.find_items_by_invoice_item(id)
   end
 
   def transaction_invoice(invoice_id)

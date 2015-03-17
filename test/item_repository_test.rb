@@ -8,17 +8,18 @@ require_relative '../lib/sales_engine'
 
 class ItemRepositoryTest < MiniTest::Test
 
-  attr_accessor :filename
-  attr_reader :engine, :item_repo
+  attr_reader :item_repo,
+              :filename,
+              :engine
 
   def setup
-    @filename = './test/data/items.csv'
+    @filename = "./test/data"
     @engine = SalesEngine.new(filename)
-    @item_repo = ItemRepository.parse(filename, engine)
+    @item_repo = ItemRepository.load_csvs("#{filename}/items.csv", engine)
   end
 
   def test_it_will_know_its_parent
-    assert_equal engine, item_repo.parent
+    assert_equal engine, item_repo.sales_engine
   end
 
   def test_it_will_return_all_of_the_item_objects

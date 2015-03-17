@@ -9,17 +9,20 @@ require_relative '../lib/parser'
 
 class MerchantRepositoryTest < MiniTest::Test
 
-  attr_accessor :file_path
-  attr_reader :merchant_repo, :filename, :engine
+  attr_reader :merchant_repo, 
+              :filename, 
+              :engine
+
+  # "/Users/MinnieLee/Turing/1Module/Sales_Engine/sales_engine_spec_harness/csvs"
 
   def setup
-    @filename = './test/data/merchants.csv'
+    @filename = "./test/data"
     @engine = SalesEngine.new(filename)
-    @merchant_repo = MerchantRepository.parse(filename, engine)
+    @merchant_repo = MerchantRepository.load_csvs("#{filename}/merchants.csv", engine)
   end
 
   def test_it_knows_its_parent
-    assert_equal engine, merchant_repo.parent
+    assert_equal engine, merchant_repo.sales_engine
   end
 
   def test_it_will_return_all_of_the_merchant_objects

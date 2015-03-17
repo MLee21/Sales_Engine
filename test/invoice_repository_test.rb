@@ -8,17 +8,18 @@ require_relative '../lib/sales_engine'
 
 class InvoiceRepositoryTest < MiniTest::Test
 
-  attr_accessor :filename
-  attr_reader :engine, :invoice_repo
+  attr_reader :invoice_repo,
+              :filename,
+              :engine
 
   def setup
-    @filename = './test/data/invoices.csv'
+    @filename = "./test/data"
     @engine = SalesEngine.new(filename)
-    @invoice_repo = InvoiceRepository.parse(filename, engine)
+    @invoice_repo = InvoiceRepository.load_csvs("#{filename}/invoices.csv", engine)
   end
 
   def test_it_will_know_its_parent
-    assert_equal engine, invoice_repo.parent
+    assert_equal engine, invoice_repo.sales_engine
   end
 
   def test_it_will_return_all_of_the_invoice_objects
