@@ -5,6 +5,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require_relative '../lib/item_repository'
 require_relative '../lib/sales_engine'
+require 'bigdecimal'
 
 class ItemRepositoryTest < MiniTest::Test
 
@@ -43,7 +44,7 @@ class ItemRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_items_unit_price
-    assert_equal 75107, item_repo.find_by_unit_price(75107).unit_price
+    assert_equal (BigDecimal.new(75107)/100), item_repo.find_by_unit_price(BigDecimal.new(75107)/100).unit_price
   end
 
   def test_it_will_find_merchant_id
@@ -71,7 +72,7 @@ class ItemRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_all_items_by_unit_price
-    assert_equal 1, item_repo.find_all_by_unit_price(32301).count
+    assert_equal 0, item_repo.find_all_by_unit_price(32301).count
   end
 
   def test_it_will_find_all_items_by_merchant_id

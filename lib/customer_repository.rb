@@ -1,5 +1,6 @@
 require_relative 'parser'
 require_relative 'customer'
+require 'pry'
 
 class CustomerRepository
 
@@ -78,7 +79,7 @@ class CustomerRepository
     customers.find_all { |customer| customer.updated_at == date }
   end
 
-  def invoices(id)
-    sale_engine.find_customer_invoices(id)
+  def find_invoices(id)
+    sales_engine.find_invoices_by_customer_id(id)
   end
 end

@@ -13,9 +13,9 @@ class InvoiceItemTest < MiniTest::Test
   attr_reader :filename, :engine, :invoice_item_repository
 
   def setup
-    @filename = './test/data/invoice_items.csv'
+    @filename = "./test/data"
     @engine = SalesEngine.new(filename)
-    @invoice_item_repository = InvoiceItemRepository.load_csvs(filename, engine)
+    @invoice_item_repository = InvoiceItemRepository.load_csvs("#{filename}/invoice_items.csv", engine)
   end
 
   def test_it_knows_its_parent
@@ -35,7 +35,7 @@ class InvoiceItemTest < MiniTest::Test
   def test_repo_finds_invoices_by_invoice_item
     repo = MiniTest::Mock.new
     invoice_item = InvoiceItem.new({},repo)
-    repo.expect(:find_invoices_by_invoice_item,[1],[0])
+    repo.expect(:find_invoice,[1],[0])
     assert_equal [1], invoice_item.invoice
     repo.verify
   end
@@ -43,7 +43,7 @@ class InvoiceItemTest < MiniTest::Test
   def test_repo_finds_items_by_invoice_item
     repo = MiniTest::Mock.new
     invoice_item = InvoiceItem.new({},repo)
-    repo.expect(:find_items_by_invoice_item, [539],[0])
+    repo.expect(:find_item, [539],[0])
     assert_equal [539], invoice_item.item
     repo.verify
   end

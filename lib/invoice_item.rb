@@ -12,7 +12,7 @@ class InvoiceItem
   def initialize(data, repo)
     @id         = data[:id].to_i
     @item_id    = data[:item_id].to_i
-    @invoice_id = data[:invoice_id]
+    @invoice_id = data[:invoice_id].to_i
     @quantity   = data[:quantity]
     @unit_price = data[:unit_price]
     @created_at = data[:created_at]
@@ -21,10 +21,10 @@ class InvoiceItem
   end
 
   def invoice
-    repo.find_invoices_by_invoice_item(id)
+    repo.find_invoice(invoice_id)
   end
 
   def item
-    repo.find_items_by_invoice_item(id)
+    repo.find_item(item_id)
   end
 end

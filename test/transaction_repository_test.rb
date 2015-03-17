@@ -85,8 +85,8 @@ class TransactionRepositoryTest < MiniTest::Test
     sales_engine = MiniTest::Mock.new
     repo = TransactionRepository.new(filename, sales_engine)
     invoice = Invoice.new({id: 10}, 'fake parent')
-    sales_engine.expect(:transaction_invoice, invoice, [10])
-    assert_equal invoice, repo.invoice(10)
+    sales_engine.expect(:find_invoice_by_transaction, invoice, [10])
+    assert_equal invoice, repo.find_invoice(10)
     sales_engine.verify
   end
 end

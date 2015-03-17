@@ -1,4 +1,4 @@
-require 'bigdecimal/util'
+require 'bigdecimal'
 
 class Item
 
@@ -8,25 +8,25 @@ class Item
               :unit_price,
               :merchant_id,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repo
 
-  def initialize(data, parent)
+  def initialize(data, repo)
     @id          = data[:id].to_i
     @name        = data[:name]
     @description = data[:description]
-    @unit_price  = data[:unit_price]
-    @merchant_id = data[:merchant_id]
+    @unit_price  = (BigDecimal.new(data[:unit_price]))/100
+    @merchant_id = data[:merchant_id].to_i
     @created_at  = data[:created_at]
     @updated_at  = data[:updated_at]
-    @repo        = parent
+    @repo        = repo
   end
 
   def invoice_items
-    repo.invoice_items(id)
+    repo.find_invoice_item(id)
   end
 
   def merchant
-    repo.merchant(id)
+    repo.find_merchant(merchant_id)
   end
-
 end

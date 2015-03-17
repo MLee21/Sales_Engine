@@ -1,7 +1,7 @@
 require_relative 'parser'
 require_relative 'item'
 require 'pry'
-
+require 'bigdecimal'
 
 class ItemRepository
 
@@ -94,12 +94,12 @@ class ItemRepository
     items.find_all { |item| item.updated_at == date }
   end
 
-  def invoice_items(id)
-    sales_engine.item_invoice_items(id)
+  def find_invoice_item(id)
+    sales_engine.find_invoice_item_by_item_id(id)
   end
 
-  def merchant(merchant_id)
-    sales_engine.item_merchant(merchant_id)
+  def find_merchant(id)
+    sales_engine.find_item_by_merchant_id(id)
   end
 
 end

@@ -1,5 +1,6 @@
 require_relative 'parser'
 require_relative 'invoice'
+require 'pry'
 
 class InvoiceRepository
 
@@ -86,23 +87,23 @@ class InvoiceRepository
     invoices.find_all { |invoice| invoice.updated_at == date }
   end
 
-  def find_transactions_by_invoice_id(id)
+  def find_by_invoice_id(id)
     sales_engine.find_transactions_by_invoice_id(id)
   end
 
-  def find_invoice_items_by_invoice_id(id)
-    sales_engine.find_invoice_items_by_invoice_id(id)
+  def find_by_invoice_item(id)
+    sales_engine.find_invoice_item_by_invoice_id(id)
   end
 
-  def find_customer_by_invoice_id(id)
-    sales_engine.find_customer_by_invoice_id(id)
+  def find_customer(id)
+    sales_engine.find_customer_by_id(id)
   end
 
   def find_merchant_by_invoice_id(id)
     sales_engine.find_merchant_by_invoice_id(id)
   end
 
-  def find_items_by_invoice_items(id)
-    sales_engine.find_items_by_invoice_id(id)
+  def find_invoice_item(id)
+    sales_engine.find_invoice_item_by_invoice_id(id)
   end
 end
