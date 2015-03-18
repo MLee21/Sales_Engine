@@ -48,14 +48,14 @@ class InvoiceTest < MiniTest::Test
     repo.verify
   end
 
-  def test_repo_finds_items_for_invoices
-    skip
-    repo = MiniTest::Mock.new
-    invoice = Invoice.new({},repo)
-    repo.expect(:find_invoice_items_by_invoice_id,[1],[0])
-    assert_equal 8, repo.invoice_items(0).items.size
-    repo.verify
-  end
+  # def test_repo_finds_items_for_invoices
+  #   skip
+  #   repo = MiniTest::Mock.new
+  #   invoice = Invoice.new({},repo)
+  #   repo.expect(:find_invoice_items_by_invoice_id,[1],[0])
+  #   assert_equal 8, repo.invoice_items(0).items.size
+  #   repo.verify
+  # end
 
   def test_repo_finds_customers_for_invoices
     repo = MiniTest::Mock.new
@@ -72,4 +72,33 @@ class InvoiceTest < MiniTest::Test
     assert_equal [1], invoice.merchant 
     repo.verify
   end
+
+  def tests_if_there_are_successful_transactions
+    successful_transaction = MiniTest::Mock.new
+    successful_transaction.expect(:result, "success")
+    failed_transaction = MiniTest::Mock.new
+    failed_transaction.expect(:result, "failed")
+    transactions = [
+      successful_transaction,
+      failed_transaction
+    ]
+    invoice = Invoice.new({},repo)
+    invoice.stub :transactions, transactions do 
+      assert_equal true, invoice.successful?
+    end
+  end
+
+  # def test_it_can_calculate_individual_revenue
+  #   invoice_item1 = MiniTest::Mock.new
+  #   invoice_item1.expect(:quantity, 7)
+  #   invoice_item1.expect(:unit_price, 2.00)
+  #   # invoice_item2 = MiniTest::Mock.new
+  #   # invoice_item2.expect(:quantity, 5)
+  #   # invoice_item2.expect(:unit_price, 4.00)
+  #   # invoice_items = [invoice_item1, invoice_item2]
+  #   invoice = Invoice.new({}, invoice_repository)
+  #   invoice.stub :revenue, invoice_item1 do
+  #     assert_equal 14.00, invoice.revenue
+  #   end
+  # end
 end

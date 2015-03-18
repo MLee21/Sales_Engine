@@ -28,7 +28,7 @@ class InvoiceRepository
   end
 
   def inspect
-    "#<#{self.class} #{@invoice.size} rows>"
+    "#<#{self.class} #{@invoices.size} rows>"
   end
 
   def all

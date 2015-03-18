@@ -5,6 +5,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require_relative '../lib/invoice_item_repository'
 require_relative '../lib/sales_engine'
+require 'bigdecimal'
 
 class InvoiceItemRepositoryTest < MiniTest::Test
 
@@ -47,7 +48,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_by_unit_price
-    assert_equal 13635, invoice_item_repo.find_by_unit_price(13635).unit_price
+    assert_equal (BigDecimal.new(13635)/100), invoice_item_repo.find_by_unit_price(BigDecimal.new(13635)/100).unit_price
   end
 
   def test_it_will_find_when_item_was_created_at
@@ -75,7 +76,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_all_items_by_unit_price
-    assert_equal 1, invoice_item_repo.find_all_by_unit_price(66747).count
+    assert_equal 0, invoice_item_repo.find_all_by_unit_price(66747).count
   end
 
   def test_it_will_find_all_items_by_created_at
