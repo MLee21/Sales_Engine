@@ -46,5 +46,4 @@ class TransactionTest < Minitest::Test
     assert_equal "Billy Bob", transaction.invoice
     repo.verify
   end
-
 end

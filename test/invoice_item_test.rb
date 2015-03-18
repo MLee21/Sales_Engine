@@ -32,19 +32,19 @@ class InvoiceItemTest < MiniTest::Test
     assert_equal "2012-03-27 14:54:09 UTC", invoice_item.updated_at
   end
 
-  def test_repo_finds_invoices_by_invoice_item
-    repo = MiniTest::Mock.new
-    invoice_item = InvoiceItem.new({},repo)
-    repo.expect(:find_invoice,[1],[0])
-    assert_equal [1], invoice_item.invoice
-    repo.verify
-  end
+  # def test_repo_finds_invoices_by_invoice_item
+  #   repo = MiniTest::Mock.new
+  #   invoice_item = InvoiceItem.new({},repo)
+  #   repo.expect(:find_invoice,[1],[0])
+  #   assert_equal [1], invoice_item.invoice
+  #   repo.verify
+  # end
 
-  def test_repo_finds_items_by_invoice_item
-    repo = MiniTest::Mock.new
-    invoice_item = InvoiceItem.new({},repo)
-    repo.expect(:find_item, [539],[0])
-    assert_equal [539], invoice_item.item
-    repo.verify
-  end
+  # def test_repo_finds_items_by_invoice_item
+  #   repo = MiniTest::Mock.new
+  #   invoice_item = InvoiceItem.new({},repo)
+  #   repo.expect(:find_item, [539],[0])
+  #   assert_equal [539], invoice_item.item
+  #   repo.verify
+  # end
 end

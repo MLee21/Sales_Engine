@@ -23,4 +23,18 @@ class Merchant
   def invoices
     repo.find_invoices(id)
   end 
+
+  def successful_invoices
+    invoices.select do |invoice|
+      invoice.successful?
+    end
+  end
+
+  def revenue(date = nil)
+    if date.nil?
+      successful_invoices.reduce(0) do |sum, invoice|
+        sum + invoice.revenue
+      end
+    end
+  end
 end

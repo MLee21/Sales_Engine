@@ -13,8 +13,10 @@ class MerchantTest < MiniTest::Test
   attr_reader :filename, :merchant_repository, :engine, :merchants
   
   def setup
-    @filename = './test/data/merchants.csv'
-    @engine = SalesEngine.new(filename)
+    directory = './test/data'
+    @filename = "#{directory}/merchants.csv"
+    @engine = SalesEngine.new(directory)
+    @engine.startup
     @merchant_repository = MerchantRepository.load_csvs(filename, engine)
   end
 
@@ -48,5 +50,25 @@ class MerchantTest < MiniTest::Test
     repo.expect(:find_invoices,[1],[0])
     assert_equal [1], merchant.invoices
     repo.verify
+  end
+
+  def test_find_invoices_through_successful_transactions
+    merchant = Merchant.new({:id=>1},merchant_repository)
+    invoice_ids = merchant.successful_invoices.map do |invoice|
+      invoice.id
+    end 
+    assert_equal [29], invoice_ids
+  end
+
+  def test_it_can_calculate_revenue
+    merchant = Merchant.new({},merchant_repository)
+    invoice1 = MiniTest::Mock.new
+    invoice1.expect(:revenue, 120.50)
+    invoice2 = MiniTest::Mock.new
+    invoice2.expect(:revenue, 0.50)
+    invoices = [invoice1,invoice2]
+    merchant.stub :successful_invoices, invoices do
+      assert_equal 121.00, merchant.revenue
+    end
   end
 end

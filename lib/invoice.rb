@@ -39,5 +39,15 @@ class Invoice
   def items
     invoice_items.map { |invoice_item| invoice_item.item }
   end
+
+  def successful?
+    transactions.any? { |transaction| transaction.result == "success"}
+  end
+
+   def revenue
+    invoice_items.reduce(0) do |sum, invoice_item|
+      sum + (invoice_item.quantity * invoice_item.unit_price)
+    end
+  end 
 end
 

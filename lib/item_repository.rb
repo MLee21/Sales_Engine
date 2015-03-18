@@ -101,5 +101,4 @@ class ItemRepository
   def find_merchant(id)
     sales_engine.find_item_by_merchant_id(id)
   end
-
 end

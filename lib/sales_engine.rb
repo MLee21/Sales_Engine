@@ -27,26 +27,50 @@ class SalesEngine
 
   def merchant_repository
     @merchant_repository = MerchantRepository.load_csvs("#{data}/merchants.csv", self)
+    @merchant_repository ||= begin
+      more_data = parse(data, "merchants.csv")
+      MerchantRepository.new(more_data, self)
+    end
   end
 
   def item_repository
     @item_repository = ItemRepository.load_csvs("#{data}/items.csv", self)
+    @item_repository ||= begin
+      more_data = parse(data, "items.csv")
+      ItemRepository.new(more_data, self)
+    end
   end
 
   def invoice_item_repository
     @invoice_item_repository = InvoiceItemRepository.load_csvs("#{data}/invoice_items.csv", self)
+    @invoice_item_repository ||= begin
+      more_data = parse(data, "invoice_items.csv")
+      InvoiceItemRepository.new(more_data, self)
+    end
   end
 
   def invoice_repository
     @invoice_repository = InvoiceRepository.load_csvs("#{data}/invoices.csv", self)
+    @invoice_repository ||= begin
+      more_data = parse(data, "invoices.csv")
+      InvoiceRepository.new(more_data, self)
+    end
   end
 
   def transaction_repository
     @transaction_repository = TransactionRepository.load_csvs("#{data}/transactions.csv", self)
+    @transaction_repository ||= begin
+      more_data = parse(data, "transactions.csv")
+      TransactionRepository.new(more_data, self)
+    end
   end
 
   def customer_repository
     @customer_repository = CustomerRepository.load_csvs("#{data}/customers.csv", self)
+    @customer_repository ||= begin
+      more_data = parse(data, "customers.csv")
+      CustomerRepository.new(more_data, self)
+    end
   end
 
   def find_items_by_merchant_id(id)
