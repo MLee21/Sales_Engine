@@ -6,8 +6,6 @@ class MerchantRepository
 
   attr_reader :merchants,
               :filename,
-              # :repo,  ## ran rake spec without this variable and still ran after changing parse method
-              ## not sure if it's necessary for rest of repo. don't delete until sure.
               :sales_engine
 
   def self.load_csvs(filename, sales_engine)
@@ -76,4 +74,23 @@ class MerchantRepository
   def find_invoices(id)
     sales_engine.find_invoices_by_merchant_id(id)
   end
+
+  def revenue(date)
+    merchants.map do |merchant|
+      merchant.revenue(date)
+    end.reduce(:+)
+  end
+
+  def most_revenue(x)
+    merchants.sort_by do |merchant|
+      merchant.revenue
+    end.reverse.first(x)
+  end
+
+  def most_items(x)
+    merchants.sort_by do |merchant|
+      merchant.successful_items
+    end.reverse.first(x)
+  end
+
 end

@@ -6,11 +6,8 @@ class InvoiceRepository
 
   attr_reader :filename,
               :invoices,
-              :sales_engine
-              # :repo ## ran rake spec without this variable
-               # and still ran after changing parse method
-              ## not sure if it's necessary for rest of repo. don't delete until sure.
-          
+              :sales_engine,
+              :invoices_by_merchant_id
 
   def self.load_csvs(filename, sales_engine)
     repo = self.allocate()
@@ -24,6 +21,13 @@ class InvoiceRepository
 
   def initialize(invoices, sales_engine)
     @invoices = invoices
+    @invoices_by_merchant_id = @invoices.reduce({}) do |hash, invoice|
+      unless hash.include?(invoice.merchant_id)
+        hash[invoice.merchant_id] = []
+      end
+      hash[invoice.merchant_id] << invoice
+      hash
+    end
     @sales_engine = sales_engine
   end
 
@@ -72,7 +76,8 @@ class InvoiceRepository
   end
 
   def find_all_by_merchant_id(id)
-    invoices.find_all { |invoice| invoice.merchant_id == id }
+    invoices_by_merchant_id[id] || []
+    # invoices.find_all { |invoice| invoice.merchant_id == id }
   end
 
   def find_all_by_status(details)
@@ -87,7 +92,7 @@ class InvoiceRepository
     invoices.find_all { |invoice| invoice.updated_at == date }
   end
 
-  def find_by_invoice_id(id)
+  def find_transactions(id)
     sales_engine.find_transactions_by_invoice_id(id)
   end
 

@@ -7,10 +7,6 @@ class CustomerRepository
   attr_reader :filename,
               :customers,
               :sales_engine
-              # :repo,  
-              ## ran rake spec without this variable and 
-              # still ran after changing parse method
-              ## not sure if it's necessary for rest of repo. don't delete until sure.           
 
   def self.load_csvs(filename, sales_engine)
     repo = self.allocate()
@@ -19,7 +15,7 @@ class CustomerRepository
       Customer.new(customer, repo)
     end
     repo.send(:initialize, customers, sales_engine)
-    repo 
+    repo
   end
 
   def initialize(customers, sales_engine)

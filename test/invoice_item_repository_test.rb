@@ -14,9 +14,11 @@ class InvoiceItemRepositoryTest < MiniTest::Test
               :filename
 
   def setup
-    @filename = "./test/data"
-    @engine = SalesEngine.new(filename)
-    @invoice_item_repo = InvoiceItemRepository.load_csvs("#{filename}/invoice_items.csv", engine)
+    directory = './test/data'
+    @filename = "#{directory}/invoice_items.csv"
+    @engine = SalesEngine.new(directory)
+    @engine.startup
+    @invoice_item_repo = InvoiceItemRepository.load_csvs(filename, engine)
   end
 
   def test_it_will_know_its_parent
