@@ -7,8 +7,6 @@ class ItemRepository
 
   attr_reader :items,
               :filename,
-              # :repo, ## ran rake spec without this variable and still ran after changing parse method
-              ## not sure if it's necessary for rest of repo. don't delete until sure.
               :sales_engine
 
   def self.load_csvs(filename, sales_engine)
@@ -71,7 +69,7 @@ class ItemRepository
   end
 
   def find_all_by_name(name)
-    items.find_all { |item| item.name == name } 
+    items.find_all { |item| item.name == name }
   end
 
   def find_all_by_description(details)
@@ -100,5 +98,29 @@ class ItemRepository
 
   def find_merchant(id)
     sales_engine.find_item_by_merchant_id(id)
+  end
+
+  def most_items(x)
+    items.sort_by { |item| item.number_sold }.reverse.first(x)
+  end
+
+  def find_items_sold(id)
+    find_successful_invoice_items(id).inject(0) do |sum, invoice_item|
+      sum + invoice_item.quantity
+    end
+  end
+
+  def find_successful_invoice_items(id)
+    find_invoice_item(id).select do|invoice_item|
+      sales_engine.successful_transactions_from_invoice_id(invoice_item.invoice_id)
+    end
+  end
+
+  def revenue_for_items
+    items.map(&:revenue).reduce(0, :+)
+  end
+
+  def most_revenue(x)
+    items.sort_by(&:revenue).reverse.first(x)
   end
 end

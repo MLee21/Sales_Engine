@@ -11,6 +11,8 @@ class InvoiceItem
               :updated_at,
               :repo
 
+  attr_writer :repo
+
   def initialize(data, repo)
     @id         = data[:id].to_i
     @item_id    = data[:item_id].to_i
@@ -28,5 +30,9 @@ class InvoiceItem
 
   def item
     repo.find_item(item_id)
+  end
+
+  def revenue
+    quantity * unit_price
   end
 end

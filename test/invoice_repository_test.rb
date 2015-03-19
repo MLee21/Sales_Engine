@@ -47,11 +47,11 @@ class InvoiceRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_invoice_by_created_at
-    assert_equal "2012-03-25 09:54:09 UTC", invoice_repo.find_by_created_at("2012-03-25 09:54:09 UTC").created_at
+    assert_equal Date.parse("2012-03-25 09:54:09 UTC"), invoice_repo.find_by_created_at(Date.parse("2012-03-25 09:54:09 UTC")).created_at
   end
 
   def test_it_will_find_invoice_by_updated_at
-    assert_equal "2012-03-25 09:54:09 UTC", invoice_repo.find_by_updated_at("2012-03-25 09:54:09 UTC").updated_at
+    assert_equal Date.parse("2012-03-25 09:54:09 UTC"), invoice_repo.find_by_updated_at(Date.parse("2012-03-25 09:54:09 UTC")).updated_at
   end
 
   def test_it_will_find_all_invoice_by_id
@@ -71,18 +71,18 @@ class InvoiceRepositoryTest < MiniTest::Test
   end
 
   def test_it_will_find_all_invoice_by_created_at
-    assert_equal 1, invoice_repo.find_all_by_created_at("2012-03-25 09:54:09 UTC").count
+    assert_equal 4, invoice_repo.find_all_by_created_at(Date.parse("2012-03-25 09:54:09 UTC")).count
   end
 
   def test_it_will_find_all_invoice_by_updated_at
-    assert_equal 1, invoice_repo.find_all_by_updated_at("2012-03-25 09:54:09 UTC").count
+    assert_equal 4, invoice_repo.find_all_by_updated_at(Date.parse("2012-03-25 09:54:09 UTC")).count
   end
 
   def test_it_will_return_transactions_associated_with_the_invoice
     sales_engine = MiniTest::Mock.new
     repo = InvoiceRepository.new(filename, sales_engine)
-    sales_engine.expect(:find_transactions_by_invoice_id,[11],[11])
-    assert_equal [11], repo.find_by_invoice_id(11)
+    sales_engine.expect(:find_merchant_by_invoice_id,[11],[11])
+    assert_equal [11], repo.find_merchant_by_invoice_id(11)
     sales_engine.verify
   end
 

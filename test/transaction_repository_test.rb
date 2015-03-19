@@ -5,6 +5,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require_relative '../lib/transaction_repository'
 require_relative '../lib/sales_engine'
+require 'date'
 
 class TransactionRepositoryTest < MiniTest::Test
 
@@ -17,6 +18,15 @@ class TransactionRepositoryTest < MiniTest::Test
     @engine = SalesEngine.new(filename)
     @trans_repo = TransactionRepository.load_csvs("#{filename}/transactions.csv", engine)
   end
+
+  def working_data
+    {
+      id: 12,
+      created_at: "2012-03-25 09:54:09 UTC",
+      updated_at: "2012-03-25 09:54:09 UTC"
+    }
+  end
+
   def test_it_will_know_its_parent
     assert_equal engine, trans_repo.sales_engine
   end
@@ -84,7 +94,7 @@ class TransactionRepositoryTest < MiniTest::Test
   def test_invoice_method_will_return_invoice_id_associated_with_a_particular_transaction
     sales_engine = MiniTest::Mock.new
     repo = TransactionRepository.new(filename, sales_engine)
-    invoice = Invoice.new({id: 10}, 'fake parent')
+    invoice = Invoice.new(working_data, 'fake parent')
     sales_engine.expect(:find_invoice_by_transaction, invoice, [10])
     assert_equal invoice, repo.find_invoice(10)
     sales_engine.verify

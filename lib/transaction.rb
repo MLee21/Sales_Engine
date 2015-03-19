@@ -11,6 +11,8 @@ class Transaction
               :updated_at,
               :repo
 
+  attr_writer :repo
+
   def initialize(data, repo)
     @id                          = data[:id].to_i
     @invoice_id                  = data[:invoice_id].to_i
@@ -25,5 +27,4 @@ class Transaction
   def invoice
     repo.find_invoice(invoice_id)
   end
-
 end

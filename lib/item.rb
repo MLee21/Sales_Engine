@@ -1,4 +1,5 @@
 require 'bigdecimal'
+require 'pry'
 
 class Item
 
@@ -28,5 +29,20 @@ class Item
 
   def merchant
     repo.find_merchant(merchant_id)
+  end
+
+  def best_day
+    sales = invoice_items.max_by do |invoice_item|
+      invoice_item.quantity
+    end
+    sales.invoice.created_at
+  end
+
+  def number_sold
+    repo.find_items_sold(id)
+  end
+
+  def revenue
+    invoice_items.map(&:revenue).reduce(0, :+)
   end
 end

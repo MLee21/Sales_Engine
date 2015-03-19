@@ -1,4 +1,5 @@
 require 'pry'
+require 'date'
 
 class Invoice
 
@@ -10,13 +11,15 @@ class Invoice
               :updated_at,
               :repo
 
+  attr_writer :repo
+
   def initialize(data, repo)
     @id             = data[:id].to_i
     @customer_id    = data[:customer_id].to_i
     @merchant_id    = data[:merchant_id].to_i
     @status         = data[:status]
-    @created_at     = data[:created_at]
-    @updated_at     = data[:updated_at]
+    @created_at     = Date.parse(data[:created_at])
+    @updated_at     = Date.parse(data[:updated_at])
     @repo           = repo
   end
 
@@ -25,7 +28,31 @@ class Invoice
   end
 
   def transactions
-    repo.find_by_invoice_id(id)
+    repo.find_transactions(id)
+  end
+
+  def successful_transactions
+    transactions.select do |transaction|
+      transaction.result == "success"
+    end.flatten
+  end
+
+  def unsuccessful_transactions
+    transactions.select do |transaction|
+      transaction.result == "failed"
+    end.flatten
+  end
+
+  def unsuccessful_invoices
+    unsuccessful_transactions.map do |transaction|
+      transaction.invoice
+    end
+  end
+
+  def successful_invoices
+    successful_transactions.map do |transaction|
+      transaction.invoice
+    end
   end
 
   def customer
@@ -33,7 +60,7 @@ class Invoice
   end
 
   def merchant
-    repo.find_merchant_by_invoice_id(id)
+    repo.find_merchant_by_invoice_id(merchant_id)
   end
 
   def items
@@ -44,10 +71,16 @@ class Invoice
     transactions.any? { |transaction| transaction.result == "success"}
   end
 
+  def successful_customer?
+    successful?.map do |invoice|
+      invoice.customer
+    end
+  end
+
    def revenue
     invoice_items.reduce(0) do |sum, invoice_item|
       sum + (invoice_item.quantity * invoice_item.unit_price)
     end
-  end 
+  end
 end
 
