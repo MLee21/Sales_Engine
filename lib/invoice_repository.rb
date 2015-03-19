@@ -111,4 +111,28 @@ class InvoiceRepository
   def find_invoice_item(id)
     sales_engine.find_invoice_item_by_invoice_id(id)
   end
+
+  def next_id
+    invoices.last.id + 1
+  end
+
+  def create(inputs)
+    data = {
+     id:                       next_id,
+     customer_id: inputs[:customer].id,
+     merchant_id: inputs[:merchant].id,
+     status:                 "shipped",
+     created_at:         "#{Time.new}",
+     updated_at:         "#{Time.new}",
+    }
+   invoice = Invoice.new(data, self)
+   @invoices << invoice
+
+   sales_engine.add_items(inputs[:items], invoice.id)
+   invoice
+  end
+
+  def charge(information, id)
+    sales_engine.charge(information, id)
+  end
 end
