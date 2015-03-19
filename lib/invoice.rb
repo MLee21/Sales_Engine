@@ -37,17 +37,17 @@ class Invoice
     end.flatten
   end
 
-  def unsuccessful_transactions
-    transactions.select do |transaction|
-      transaction.result == "failed"
-    end.flatten
-  end
+  # def unsuccessful_transactions
+  #   transactions.select do |transaction|
+  #     transaction.result == "failed"
+  #   end.flatten
+  # end
 
-  def unsuccessful_invoices
-    unsuccessful_transactions.map do |transaction|
-      transaction.invoice
-    end
-  end
+  # def unsuccessful_invoices
+  #   unsuccessful_transactions.map do |transaction|
+  #     transaction.invoice
+  #   end
+  # end
 
   def successful_invoices
     successful_transactions.map do |transaction|
@@ -71,11 +71,11 @@ class Invoice
     transactions.any? { |transaction| transaction.result == "success"}
   end
 
-  def successful_customer?
-    successful?.map do |invoice|
-      invoice.customer
-    end
-  end
+  # def successful_customer?
+  #   successful?.map do |invoice|
+  #     invoice.customer
+  #   end
+  # end
 
    def revenue
     invoice_items.reduce(0) do |sum, invoice_item|

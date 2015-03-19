@@ -83,7 +83,7 @@ class MerchantTest < MiniTest::Test
   #   invoice2.expect(:revenue, 0.50)
   #   invoices = [invoice1,invoice2]
   #   merchant.stub :successful_invoices, invoices do
-  #     assert_equal 121.00, merchant.revenue(invoices)
+  #     assert_equal 121.00, merchant.revenue
   #   end
   # end
 
@@ -140,10 +140,10 @@ class MerchantTest < MiniTest::Test
     assert_equal 12, merchant_repo.found_by
   end
 
-  # class ::BigDecimal
-  #   def inspect
-  #     sprintf "%f(bd)", to_f
-  #   end
-  # end
+  def test_customer_with_pending_invoices
+    sales_engine = SalesEngine.new("./data")
+    sales_engine.startup 
+    assert_equal 2, sales_engine.merchant_repository.merchants[1].customers_with_pending_invoices.size
+  end
 
 end
