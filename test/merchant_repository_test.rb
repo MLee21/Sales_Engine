@@ -13,8 +13,6 @@ class MerchantRepositoryTest < MiniTest::Test
               :filename, 
               :engine
 
-  # "/Users/MinnieLee/Turing/1Module/Sales_Engine/sales_engine_spec_harness/csvs"
-
   def setup
     @filename = "./test/data"
     @engine = SalesEngine.new(filename)
@@ -96,4 +94,5 @@ class MerchantRepositoryTest < MiniTest::Test
     assert_equal [76], repo.find_invoices(76)
     sales_engine.verify
   end
+
 end

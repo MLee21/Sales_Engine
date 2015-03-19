@@ -58,14 +58,14 @@ class InvoiceTest < MiniTest::Test
     repo.verify
   end
 
-  def test_repo_finds_items_for_invoices
-    skip
-    repo = MiniTest::Mock.new
-    invoice = Invoice.new(working_test_data,repo)
-    repo.expect(:find_invoice_items_by_invoice_id,[1],[0])
-    assert_equal 8, repo.invoice_items(0).items.size
-    repo.verify
-  end
+  # def test_repo_finds_items_for_invoices
+  #   skip
+  #   repo = MiniTest::Mock.new
+  #   invoice = Invoice.new(working_test_data,repo)
+  #   repo.expect(:find_invoice_items_by_invoice_id,[1],[0])
+  #   assert_equal 8, repo.invoice_items(0).items.size
+  #   repo.verify
+  # end
 
   def test_repo_finds_customers_for_invoices
     repo = MiniTest::Mock.new
@@ -113,17 +113,18 @@ class InvoiceTest < MiniTest::Test
     end
   end
 
-  def test_returns_customers_with_delinquent_invoices
-    skip
-    unsuccessful_invoice = MiniTest::Mock.new
-    unsuccessful_invoice.expect(:result, "failed")
-    invoice1 = [unsuccessful_invoice]
-    invoice = Invoice.new(working_test_data,invoice_repository)
-    customer_1 = MiniTest::Mock.new
-    invoice.stub :unsuccessful, invoice1 do 
-      assert_equal customer_1, invoice.delinquent_invoices 
-    end
-  end
+  # def test_returns_customers_with_delinquent_invoices
+  #   skip
+  #   unsuccessful_invoice = MiniTest::Mock.new
+  #   unsuccessful_invoice.expect(:result, "failed")
+  #   invoice1 = [unsuccessful_invoice]
+  #   invoice = Invoice.new(working_test_data,invoice_repository)
+  #   customer_1 = MiniTest::Mock.new
+  #   invoice.stub :unsuccessful, invoice1 do 
+  #     assert_equal customer_1, invoice.delinquent_invoices 
+  #   end
+  # end
+
   # def test_it_can_calculate_individual_revenue
   #   invoice_item1 = MiniTest::Mock.new
   #   invoice_item1.expect(:quantity, 7)
@@ -137,4 +138,5 @@ class InvoiceTest < MiniTest::Test
   #     assert_equal 14.00, invoice.revenue
   #   end
   # end
+
 end

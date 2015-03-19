@@ -14,22 +14,21 @@ class TransactionTest < Minitest::Test
               :engine,
               :transaction_repository 
 
-  def setup
-    @filename = "./test/data"
-    @engine = SalesEngine.new(filename)
-    @transaction_repository = TransactionRepository.load_csvs("#{filename}/transactions.csv", engine)
-  end 
-
   def test_it_exists
     assert Transaction
   end
 
-  def test_it_knows_its_parent
-    assert_equal transaction_repository, transaction_repository.transactions.first.repo
-  end
-
   def test_it_has_attributes_associated_with_the_transaction
-    transaction = transaction_repository.transactions.first
+    transaction = Transaction.new({:id=>1, 
+                                   :invoice_id=>1,
+                                   :credit_card_number=>"4654405418249632",
+                                   :credit_card_expiration_date=>nil,
+                                   :result=> "success",
+                                   :created_at=>"2012-03-27 14:54:09 UTC",
+                                   :updated_at=>"2012-03-27 14:54:09 UTC"
+                                   },
+                                   'fake_repository')
+
     assert_equal 1, transaction.id 
     assert_equal 1, transaction.invoice_id
     assert_equal "4654405418249632", transaction.credit_card_number

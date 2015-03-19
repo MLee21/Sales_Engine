@@ -20,13 +20,6 @@ class TransactionRepository
 
   def initialize(transactions, sales_engine)
     @transactions = transactions
-    @transactions_by_invoice_id = @transactions.reduce({}) do |hash, transaction|
-      unless hash.include?(transaction.invoice_id)
-        hash[transaction.invoice_id] = []
-      end
-      hash[transaction.invoice_id] << transaction 
-      hash
-    end
     @sales_engine = sales_engine
   end
 
@@ -76,8 +69,7 @@ class TransactionRepository
   end
 
   def find_all_by_invoice_id(id)
-    transactions_by_invoice_id[id] || []
-    # transactions.find_all { |transaction| transaction.invoice_id == id }
+    transactions.find_all { |transaction| transaction.invoice_id == id }
   end
 
   def find_all_by_credit_card_number(number)
@@ -108,7 +100,7 @@ class TransactionRepository
 
   def create_new_transaction(card, id)
     data = {  id:              "#{transactions.last.id + 1}",
-      invoice_id:                                         id, 
+      invoice_id:                                         id,
       credit_card_number:          card[:credit_card_number],
       credit_card_expiration_date: card[:credit_card_expiration_date],
       result:                      card[:result],
@@ -116,10 +108,11 @@ class TransactionRepository
       updated_at:                  "#{Date.new}"
     }
     transaction1 = Transaction.new(data, self)
-    transactions << transaction1 
-    unless transactions_by_invoice_id.include?(id)
-      transactions_by_invoice_id[id] = []
-    end
-      transactions_by_invoice_id[id] << transaction1 
-  end   
+    transactions << transaction1
+    # unless transactions_by_invoice_id.include?(id)
+    #   transactions_by_invoice_id[id] = []
+    # end
+    #   transactions_by_invoice_id[id] << transaction1
+    # end
+  end
 end

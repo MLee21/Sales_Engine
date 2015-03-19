@@ -80,7 +80,7 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_it_will_return_transactions_associated_with_the_invoice
     sales_engine = MiniTest::Mock.new
-    repo = InvoiceRepository.new(filename, sales_engine)
+    repo = InvoiceRepository.new({}, sales_engine)
     sales_engine.expect(:find_merchant_by_invoice_id,[11],[11])
     assert_equal [11], repo.find_merchant_by_invoice_id(11)
     sales_engine.verify
@@ -88,7 +88,7 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_it_will_return_invoice_items_associated_with_the_invoice
     sales_engine = MiniTest::Mock.new
-    repo = InvoiceRepository.new(filename, sales_engine)
+    repo = InvoiceRepository.new({}, sales_engine)
     sales_engine.expect(:find_invoice_item_by_invoice_id,[3],[3])
     assert_equal [3], repo.find_by_invoice_item(3)
     sales_engine.verify
@@ -96,7 +96,7 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_it_will_return_items_associated_with_the_invoice
     sales_engine = MiniTest::Mock.new
-    repo = InvoiceRepository.new(filename, sales_engine)
+    repo = InvoiceRepository.new({}, sales_engine)
     sales_engine.expect(:find_invoice_item_by_invoice_id, [1],[1])
     assert_equal [1], repo.find_by_invoice_item(1)
     sales_engine.verify
@@ -104,7 +104,7 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_it_will_return_customers_associated_with_the_invoice
     sales_engine = MiniTest::Mock.new
-    repo = InvoiceRepository.new(filename, sales_engine)
+    repo = InvoiceRepository.new({}, sales_engine)
     sales_engine.expect(:find_customer_by_id, [1],[1])
     assert_equal [1], repo.find_customer(1)
     sales_engine.verify
@@ -112,7 +112,7 @@ class InvoiceRepositoryTest < MiniTest::Test
 
   def test_it_will_return_merchants_associated_with_the_invoice
     sales_engine = MiniTest::Mock.new
-    repo = InvoiceRepository.new(filename, sales_engine)
+    repo = InvoiceRepository.new({}, sales_engine)
     sales_engine.expect(:find_merchant_by_invoice_id, [1],[1])
     assert_equal [1], repo.find_merchant_by_invoice_id(1)
     sales_engine.verify
