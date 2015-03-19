@@ -82,5 +82,9 @@ class Invoice
       sum + (invoice_item.quantity * invoice_item.unit_price)
     end
   end
+
+  def charge(card)
+    repo.charge(card, id)
+  end
 end
 
